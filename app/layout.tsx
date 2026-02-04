@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script src="https://unpkg.com/@phosphor-icons/web" async></script>
       </head>
       <body>{children}</body>
+      <Analytics />
     </html>
   );
 }
