@@ -1,0 +1,29 @@
+.hero {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Hauteur calculée pour remplir l'écran moins la nav (approximatif) */
+  min-height: calc(100vh - 160px); 
+}
+
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.videoWrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-black), transparent, transparent);
+}

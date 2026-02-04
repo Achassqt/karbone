@@ -1,0 +1,37 @@
+/* app/components/Contact.module.css */
+.section {
+    padding: 5rem 0;
+    background-color: var(--color-black);
+    /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
+    position: relative;
+  }
+  
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+  @media (min-width: 768px) { .title { font-size: 4.5rem; } }
+  
+  .title span { color: var(--color-neon); }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--color-neon);
+    color: var(--color-black);
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    transition: transform 0.3s;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
