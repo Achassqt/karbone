@@ -1,6 +1,6 @@
-// app/layout.js
 import './globals.css';
 import { Inter, Oswald } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' });
