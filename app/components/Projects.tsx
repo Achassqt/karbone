@@ -103,16 +103,11 @@ export default function Projects() {
     const element = document.getElementById(slideId);
     
     // Vérification que carouselRef.current et element existent
-    if (element && carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: element.offsetLeft,
-        behavior: 'smooth'
-      });
-
-      carouselRef.current.scrollIntoView({
+    if (element) {
+      element.scrollIntoView({
         behavior: 'smooth',
-        // block: 'center',
-        inline: 'nearest'
+        // block: 'center', // Aligne le slide au centre vertical de l'écran
+        inline: 'center' // Aligne le slide au centre horizontal du carousel
       });
       
       setActiveCard(cardId);

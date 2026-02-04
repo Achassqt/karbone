@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import styles from './Navbar.module.css';
+import Image from 'next/image';
+import logo from '@/public/karbone.png';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,12 +21,15 @@ export default function Navbar() {
         </div>
 
         {/* Logo */}
-        <div className={styles.logoContainer}>
+        <div className={styles.logoImg}>
+          <Image src={logo} alt="Karbone Productions" />
+        </div>
+        {/* <div className={styles.logoContainer}>
           <div className={styles.logo}>
             <span className={styles.logoMain}>Karbone</span>
             <span className={styles.logoSub}>Productions</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Menu Desktop */}
         <div className={styles.menuDesktop}>

@@ -17,6 +17,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* <--- Fluidité supplémentaire sur iOS */
 }
 
 body {
@@ -45,4 +46,16 @@ a {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+  footer > .container {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .linkContainer {
+    align-items: center;
+  }
 }

@@ -4,6 +4,8 @@ import Brand from './components/Brand';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import styles from './components/Navbar.module.css';
+import logo from '@/public/karbone.png';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -20,15 +22,19 @@ export default function Home() {
       <Contact />
 
       {/* Footer simple inclus ici ou dans un composant à part */}
-      <footer style={{ backgroundColor: '#000', padding: '2rem 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <footer style={{ backgroundColor: '#000', padding: '2rem 0' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div className={styles.logo} style={{ flex: 1 }}>
+          {/* <div className={styles.logo} style={{ flex: 1 }}>
             <span className={styles.logoMain}>Karbone</span>
             <span className={styles.logoSub}>Productions</span>
+          </div> */}
+          <div style={{ flex: 1 }}>
+            <Image src={logo} alt="Karbone Productions" width={150} />
           </div>
+
           <div style={{ flex: 1, display: "flex", justifyContent: "center", color: '#666', fontSize: '0.875rem' }}>© 2026 Karbone Productions.</div>
           <div style={{ flex: 1, display: 'flex', justifyContent: "flex-end", color: '#888' }}>
-            <div style={{ display: "flex", flexDirection: "column"  }}>
+            <div style={{ display: "flex", flexDirection: "column"  }} className='linkContainer'>
               <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem' }}>
                 Suivez-nous :
               </div>
