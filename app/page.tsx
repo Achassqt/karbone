@@ -29,7 +29,7 @@ export default function Home() {
             <span className={styles.logoSub}>Productions</span>
           </div> */}
           <div style={{ flex: 1 }}>
-            <Image src={logo} alt="Karbone Productions" width={150} />
+            <Image src={logo} alt="Karbone Productions" width={150} /> 
           </div>
 
           <div style={{ flex: 1, display: "flex", justifyContent: "center", color: '#666', fontSize: '0.875rem' }}>© 2026 Karbone Productions.</div>
