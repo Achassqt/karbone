@@ -155,7 +155,7 @@ export default function Projects() {
     // Redémarrage automatique après 15s d'inactivité
     restartTimeout.current = setTimeout(() => {
       isUserInteracting.current = false;
-      startAutoScroll();
+      // startAutoScroll();
     }, 15000);
   };
 
@@ -177,7 +177,7 @@ export default function Projects() {
       if (el) observer.observe(el);
     });
 
-    startAutoScroll();
+    // startAutoScroll();
 
     return () => {
       if (autoScrollInterval.current) clearInterval(autoScrollInterval.current);
@@ -185,6 +185,23 @@ export default function Projects() {
       observer.disconnect();
     };
   }, []); 
+
+  const handleNavigation = (direction: 'prev' | 'next') => {
+    const currentIndex = projects.findIndex(p => p.cardId === activeCard);
+    // Si l'index n'est pas trouvé, on prend le premier
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    let nextIndex;
+
+    if (direction === 'next') {
+      nextIndex = (safeIndex + 1) % projects.length;
+    } else {
+      // Modulo pour gérer le retour en arrière depuis le premier élément
+      nextIndex = (safeIndex - 1 + projects.length) % projects.length;
+    }
+
+    const targetProject = projects[nextIndex];
+    scrollToSlide(targetProject.id, targetProject.cardId);
+  };
 
   return (
     <section id="realisations" className={styles.section}>
@@ -216,72 +233,91 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Carousel */}
-        <div 
-          id="carousel-container" 
-          ref={carouselRef} 
-          className={`no-scrollbar ${styles.carousel}`}
-          onWheel={stopAutoScroll}
-          onTouchStart={stopAutoScroll}
-          onMouseDown={stopAutoScroll}
-        >  
-          {projects.map((proj) => (
-            <div key={proj.id} id={proj.id} className={styles.slide}>
-              <div className={styles.slideContent}>
-                <div className={styles.textRow}>
-                  
-                  {/* Colonne Description */}
-                  <div className={styles.colDesc}>
-                    <p className={styles.tagline}>{proj.desc1}</p>
-                    <p className={styles.desc}>{proj.desc2}</p>
-                  </div>
-                  
-                  {/* Colonne Titre */}
-                  <div className={styles.colTitle}>
-                    <h3>
-                      {proj.carouselTitle}
-                    </h3>
+        <div className={styles.carouselWrapper}>
+
+          <button 
+            className={`${styles.navButton} ${styles.navPrev}`} 
+            onClick={() => handleNavigation('prev')}
+            aria-label="Précédent"
+          >
+            <i className="ph-bold ph-caret-left"></i>
+          </button>
+
+          {/* Carousel */}
+          <div 
+            id="carousel-container" 
+            ref={carouselRef} 
+            className={`no-scrollbar ${styles.carousel}`}
+            onWheel={stopAutoScroll}
+            onTouchStart={stopAutoScroll}
+            onMouseDown={stopAutoScroll}
+          > 
+            {projects.map((proj) => (
+              <div key={proj.id} id={proj.id} className={styles.slide}>
+                <div className={styles.slideContent}>
+                  <div className={styles.textRow}>
+                    
+                    {/* Colonne Description */}
+                    <div className={styles.colDesc}>
+                      <p className={styles.tagline}>{proj.desc1}</p>
+                      <p className={styles.desc}>{proj.desc2}</p>
+                    </div>
+                    
+                    {/* Colonne Titre */}
+                    <div className={styles.colTitle}>
+                      <h3>
+                        {proj.carouselTitle}
+                      </h3>
+                    </div>
+
                   </div>
 
-                </div>
+                  {/* Video Box */}
+                  <div className={styles.videoBox}>
+                    {!playingStatus[proj.id] && (
+                      <button 
+                        className={styles.playButtonOverlay} 
+                        onClick={() => handlePlayVideo(proj.id)}
+                      >
+                        <i className="ph-fill ph-play" style={{ marginLeft: "-2px" }}></i>
+                      </button>
+                    )}
 
-                {/* Video Box */}
-                <div className={styles.videoBox}>
-                  {!playingStatus[proj.id] && (
-                    <button 
-                      className={styles.playButtonOverlay} 
-                      onClick={() => handlePlayVideo(proj.id)}
+                    <video 
+                      ref={(el) => {
+                        if (el) videoRefs.current.set(proj.id, el);
+                        else videoRefs.current.delete(proj.id);
+                      }}
+                      poster={proj.img} 
+                      controls 
+                      onPlay={() => { 
+                        isVideoPlaying.current = true;
+                        setPlayingStatus(prev => ({ ...prev, [proj.id]: true }));
+                      }}
+                      onPause={() => { 
+                        isVideoPlaying.current = false;
+                        setPlayingStatus(prev => ({ ...prev, [proj.id]: false }));
+                      }}
+                      onEnded={() => { 
+                        isVideoPlaying.current = false;
+                        setPlayingStatus(prev => ({ ...prev, [proj.id]: false }));
+                      }}
                     >
-                      <i className="ph-fill ph-play" style={{ marginLeft: "-2px" }}></i>
-                    </button>
-                  )}
-
-                  <video 
-                    ref={(el) => {
-                      if (el) videoRefs.current.set(proj.id, el);
-                      else videoRefs.current.delete(proj.id);
-                    }}
-                    poster={proj.img} 
-                    controls 
-                    onPlay={() => { 
-                      isVideoPlaying.current = true;
-                      setPlayingStatus(prev => ({ ...prev, [proj.id]: true }));
-                    }}
-                    onPause={() => { 
-                      isVideoPlaying.current = false;
-                      setPlayingStatus(prev => ({ ...prev, [proj.id]: false }));
-                    }}
-                    onEnded={() => { 
-                      isVideoPlaying.current = false;
-                      setPlayingStatus(prev => ({ ...prev, [proj.id]: false }));
-                    }}
-                  >
-                    <source src={proj.video} type="video/mp4" />
-                  </video>
+                      <source src={proj.video} type="video/mp4" />
+                    </video>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <button 
+            className={`${styles.navButton} ${styles.navNext}`} 
+            onClick={() => handleNavigation('next')}
+            aria-label="Suivant"
+          >
+            <i className="ph-bold ph-caret-right"></i>
+          </button>
 
         </div>
       </div>

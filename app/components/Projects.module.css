@@ -210,8 +210,67 @@
 
 .playButtonOverlay:hover {
   transform: translate(-50%, -50%) scale(1.1);
-  background: #ccff00;
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.6);
+  background: var(--color-neon);
+  box-shadow: 0 0 30px var(--color-neon);
 }
 
 @media (min-width: 768px) { .playButtonOverlay { width: 80px; height: 80px; font-size: 2rem; } }
+
+/* Le wrapper permet de contenir les flèches à l'intérieur de la zone du slider */
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Style de base des boutons */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Pour centrer verticalement parfaitement */
+  z-index: 10; /* Pour être au-dessus de la vidéo/image */
+  
+  width: 50px;
+  height: 50px;
+  /* border-radius: 50%; */
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border: none;
+  
+  /* Glassmorphism */
+  background: var(--color-dark);
+  /* backdrop-filter: blur(8px); */
+  /* -webkit-backdrop-filter: blur(8px); */
+  
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover {
+  /* background: white; */
+  /* color: black; */
+  transform: translateY(-50%) scale(1.1); /* On garde le centrage vertical + scale */
+  /* border-color: white; */
+}
+
+/* Positionnement spécifique Gauche / Droite */
+.navPrev {
+  left: -70px; /* Ajuste selon tes marges, 20px est standard */
+}
+
+.navNext {
+  right: -70px;
+}
+
+/* Responsive : sur mobile, on peut réduire la taille ou cacher */
+@media (max-width: 1400px) {
+  .navButton {
+    display: none;
+  }
+  .navPrev { left: 10px; }
+  .navNext { right: 10px; }
+}

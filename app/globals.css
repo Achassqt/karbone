@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,300..900;1,300..900&display=swap');
+
 :root {
   --color-black: #171717;
   /* --color-dark: #1a1a1a; */
@@ -6,7 +8,7 @@
   --color-gray: #888888;
   --color-white: #ffffff;
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Oswald', sans-serif;
+  --font-display: 'Geom', sans-serif;
 }
 
 * {

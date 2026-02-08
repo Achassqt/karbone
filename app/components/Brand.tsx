@@ -33,13 +33,13 @@ export default function Brand() {
 
         <div className={styles.gridImages}>
            <div className={styles.imgWrapper}>
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="Crew" />
+                <img src="/illu_brand_1.jpg" alt="illu_brand_1" />
            </div>
            <div className={styles.imgWrapper}>
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="Shoe" />
+                <img src="/illu_brand_2.jpg" alt="illu_brand_2" />
            </div>
            <div className={styles.imgWrapper}>
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="Lens" />
+                <img src="/illu_brand_3.jpg" alt="illu_brand_3" />
            </div>
         </div>
 
