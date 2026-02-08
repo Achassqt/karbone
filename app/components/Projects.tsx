@@ -2,6 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './Projects.module.css';
+import { StaticImageData } from 'next/image';
+import Image from 'next/image';
+
+import corporate from '@/public/corpo.png';
+import pub from '@/public/pub.jpg';
+import event from '@/public/event.jpg';
+import clip from '@/public/clip.jpg';
 
 // Interface optionnelle pour la clarté, mais aide TS
 interface Project {
@@ -11,7 +18,7 @@ interface Project {
   carouselTitle: React.ReactNode;
   desc1: string;
   desc2: string;
-  img: string;
+  img: string | StaticImageData;
   video: string;
 }
 
@@ -23,7 +30,7 @@ const projects: Project[] = [
     carouselTitle: <>FILMS <br/> D'ENTREPRISE</>,
     desc1: "Vous accompagner au mieux dans votre image de marque et votre communication.", 
     desc2: "Le film institutionnel donne un visage humain à votre structure. Au-delà des chiffres et des slogans, il met en lumière vos valeurs, vos équipes et votre impact réel.", 
-    img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop",
+    img: corporate,
     video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
   },
   { 
@@ -33,7 +40,7 @@ const projects: Project[] = [
     carouselTitle: <>FILMS <br/> PUBLICITAIRES</>,
     desc1: "Quelques secondes pour capter l’attention. Des images pour rester en tête.", 
     desc2: "Concept fort, réalisation soignée, rythme précis : notre objectif est simple transformer un message en impact.", 
-    img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=600&auto=format&fit=crop",
+    img: pub,
     video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
   },
   { 
@@ -43,7 +50,7 @@ const projects: Project[] = [
     carouselTitle: <>FILMS <br/> ÉVÉNEMENTIELS</>,
     desc1: "Un instant capturé, une mémoire partagée.", 
     desc2: "La magie de l’instant présent, immortalisée. Capturant l’énergie, les émotions et les moments forts pour offrir un souvenir inoubliable à vos participants et à votre audience.", 
-    img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=600&auto=format&fit=crop",
+    img: event,
     video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
   },
   { 
@@ -53,7 +60,7 @@ const projects: Project[] = [
     carouselTitle: "CLIP",
     desc1: "Une chanson s’écoute. Un clip se ressent.", 
     desc2: "Le clip, c’est la rencontre entre le son et l’image, entre le rythme et l’émotion. Nous créons des univers visuels qui prolongent la musique, lui donnent un visage, une texture, une mémoire.", 
-    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop",
+    img: clip,
     video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
   },
 ];
@@ -225,7 +232,7 @@ export default function Projects() {
                  <div className={styles.cardArrow}>
                     <i className="ph ph-arrow-up-right"></i>
                  </div>
-                 <img src={proj.img} alt={proj.title} />
+                 <Image src={proj.img} alt={proj.title} />
               </div>
               <h3>{proj.title}</h3>
               <p>{proj.desc1}</p>
@@ -288,7 +295,6 @@ export default function Projects() {
                         if (el) videoRefs.current.set(proj.id, el);
                         else videoRefs.current.delete(proj.id);
                       }}
-                      poster={proj.img} 
                       controls 
                       onPlay={() => { 
                         isVideoPlaying.current = true;

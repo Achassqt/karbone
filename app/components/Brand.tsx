@@ -1,5 +1,9 @@
-// app/components/Brand.js
 import styles from './Brand.module.css';
+import Image from 'next/image';
+
+import image1 from '@/public/img1.jpg';
+import image2 from '@/public/ysl.jpg';
+import image3 from '@/public/img3.jpg';
 
 export default function Brand() {
   return (
@@ -33,13 +37,13 @@ export default function Brand() {
 
         <div className={styles.gridImages}>
            <div className={styles.imgWrapper}>
-                <img src="/illu_brand_1.jpg" alt="illu_brand_1" />
+              <Image src={image1} alt="illu_brand_1" />
            </div>
            <div className={styles.imgWrapper}>
-                <img src="/illu_brand_2.jpg" alt="illu_brand_2" />
+              <Image src={image2} alt="illu_brand_2" />
            </div>
            <div className={styles.imgWrapper}>
-                <img src="/illu_brand_3.jpg" alt="illu_brand_3" />
+              <Image src={image3} alt="illu_brand_3" />
            </div>
         </div>
 
