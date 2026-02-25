@@ -1,3 +1,9 @@
+.containerCustom {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 0 20px; */
+}
+
 .section {
   background-color: var(--color-dark);
   position: relative;
@@ -9,30 +15,35 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 3rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 38px;
+  padding: 0 20px;
 }
 
 .header h2 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 2.7rem;
   text-transform: uppercase;
   line-height: 1;
 }
 
-@media (min-width: 768px) { .header h2 { font-size: 4.5rem; } }
+@media (min-width: 768px) { .header { margin-bottom: 3rem; } .header h2 { font-size: 4.5rem; } }
 
 .header h2 span { color: var(--color-neon); }
 
+.cardsGridContainer {
+  overflow-x: auto;
+  margin-bottom: 14px;
+  padding: 10px 20px;
+}
+
 /* CARDS */
 .cardsGrid {
-  display: grid;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
 }
 /* @media (min-width: 768px) { .cardsGrid { grid-template-columns: repeat(2, 1fr); } } */
-@media (min-width: 768px) { .cardsGrid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 768px) { .cardsGridContainer { overflow-x: visible; margin-bottom: 1.5rem; padding: 0 20px; } .cardsGrid { display: grid; gap: 1.5rem; grid-template-columns: repeat(4, 1fr); } }
 
 .card {
   cursor: pointer;
@@ -43,14 +54,25 @@
   background-color: var(--color-black);
 }
 
-.card:hover, .card.active {
+/* État actif toujours visible ; hover uniquement si l’appareil a un vrai survol (évite le hover collant au tap sur mobile) */
+.card.active {
   transform: translate(-8px, -8px);
   background-color: var(--color-neon);
   border-color: var(--color-neon);
   box-shadow: 8px 8px 0px 0px #333333;
 }
 
+@media (hover: hover) {
+  .card:hover {
+    transform: translate(-8px, -8px);
+    background-color: var(--color-neon);
+    border-color: var(--color-neon);
+    box-shadow: 8px 8px 0px 0px #333333;
+  }
+}
+
 .cardImgContainer {
+  display: none;
   position: relative;
   height: 6rem;
   border-radius: 0.75rem;
@@ -58,6 +80,8 @@
   margin-bottom: 0.75rem;
   /* border: 1px solid rgba(255, 255, 255, 0.1); */
 }
+
+@media (min-width: 768px) { .cardImgContainer { display: block; } }
 @media (min-width: 1024px) { .cardImgContainer { height: 8rem; } }
 
 .cardArrow {
@@ -90,14 +114,23 @@
 }
 
 .card p {
+  display: none;
   font-size: 0.75rem;
   color: var(--color-gray);
 }
 
-/* Hover/Active states modifications */
-.card:hover h3, .card.active h3 { color: var(--color-black); }
-.card:hover p, .card.active p { color: var(--color-black); }
-.card:hover .cardArrow, .card.active .cardArrow { background-color: var(--color-neon); color: var(--color-black); }
+@media (min-width: 768px) { .card p { display: block; } }
+
+/* Active toujours ; hover uniquement sur appareils avec survol (souris) */
+.card.active h3 { color: var(--color-black); }
+.card.active p { color: var(--color-black); }
+.card.active .cardArrow { background-color: var(--color-neon); color: var(--color-black); }
+
+@media (hover: hover) {
+  .card:hover h3 { color: var(--color-black); }
+  .card:hover p { color: var(--color-black); }
+  .card:hover .cardArrow { background-color: var(--color-neon); color: var(--color-black); }
+}
 
 /* CAROUSEL */
 .carousel {
@@ -159,7 +192,7 @@
 .colTitle h3 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-transform: uppercase;
   line-height: 1.2;
   text-align: left;
@@ -208,10 +241,12 @@
   margin-left: 5px;
 }
 
-.playButtonOverlay:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: var(--color-neon);
-  box-shadow: 0 0 30px var(--color-neon);
+@media (hover: hover) {
+  .playButtonOverlay:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--color-neon);
+    box-shadow: 0 0 30px var(--color-neon);
+  }
 }
 
 @media (min-width: 768px) { .playButtonOverlay { width: 80px; height: 80px; font-size: 2rem; } }
@@ -220,6 +255,7 @@
 .carouselWrapper {
   position: relative;
   width: 100%;
+  padding: 0 20px;
 }
 
 /* Style de base des boutons */
@@ -250,11 +286,13 @@
   transition: all 0.3s ease;
 }
 
-.navButton:hover {
-  /* background: white; */
-  /* color: black; */
-  transform: translateY(-50%) scale(1.1); /* On garde le centrage vertical + scale */
-  /* border-color: white; */
+@media (hover: hover) {
+  .navButton:hover {
+    /* background: white; */
+    /* color: black; */
+    transform: translateY(-50%) scale(1.1); /* On garde le centrage vertical + scale */
+    /* border-color: white; */
+  }
 }
 
 /* Positionnement spécifique Gauche / Droite */

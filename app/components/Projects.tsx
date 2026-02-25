@@ -19,6 +19,7 @@ interface Project {
   desc1: string;
   desc2: string;
   img: string | StaticImageData;
+  poster: string;
   video: string;
 }
 
@@ -31,6 +32,7 @@ const projects: Project[] = [
     desc1: "Vous accompagner au mieux dans votre image de marque et votre communication.", 
     desc2: "Le film institutionnel donne un visage humain à votre structure. Au-delà des chiffres et des slogans, il met en lumière vos valeurs, vos équipes et votre impact réel.", 
     img: corporate,
+    poster: "/corpo.png",
     video: "https://github.com/Achassqt/karbone/releases/download/v1.0/FILMTBM7_Master_Web.mp4",
   },
   { 
@@ -41,6 +43,7 @@ const projects: Project[] = [
     desc1: "Quelques secondes pour capter l’attention. Des images pour rester en tête.", 
     desc2: "Concept fort, réalisation soignée, rythme précis : notre objectif est simple transformer un message en impact.", 
     img: pub,
+    poster: "/pub.jpg",
     video: "https://github.com/Achassqt/karbone/releases/download/v1.0/SALOMON_PUB_V7.mov",
   },
   { 
@@ -51,6 +54,7 @@ const projects: Project[] = [
     desc1: "Un instant capturé, une mémoire partagée.", 
     desc2: "La magie de l’instant présent, immortalisée. Capturant l’énergie, les émotions et les moments forts pour offrir un souvenir inoubliable à vos participants et à votre audience.", 
     img: event,
+    poster: "/event.jpg",
     video: "https://github.com/Achassqt/karbone/releases/download/v1.0/Battle.reborn.noir.et.blanc.16-9.mov",
   },
   { 
@@ -61,6 +65,7 @@ const projects: Project[] = [
     desc1: "Une chanson s’écoute. Un clip se ressent.", 
     desc2: "Le clip, c’est la rencontre entre le son et l’image, entre le rythme et l’émotion. Nous créons des univers visuels qui prolongent la musique, lui donnent un visage, une texture, une mémoire.", 
     img: clip,
+    poster: "/clip.jpg",
     video: "https://github.com/Achassqt/karbone/releases/download/v1.0/CLIP_4THESUN_COMPRESS.mp4",
   },
 ];
@@ -104,21 +109,36 @@ export default function Projects() {
     }
   };
 
-  // Fonction pour scroller vers un slide
+  // Au clic sur une card : faire défiler le carousel jusqu'à la slide correspondante
   const scrollToSlide = (slideId: string, cardId: string) => {
-    stopAutoScroll();
+    // stopAutoScroll();
     const element = document.getElementById(slideId);
-    
-    // Vérification que carouselRef.current et element existent
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        // block: 'center', // Aligne le slide au centre vertical de l'écran
-        inline: 'center' // Aligne le slide au centre horizontal du carousel
-      });
+    const container = carouselRef.current;
+
+    // // Vérification que carouselRef.current et element existent
+    // if (element) {
+    //   element.scrollIntoView({
+    //     behavior: 'smooth',
+    //     // block: 'center', // Aligne le slide au centre vertical de l'écran
+    //     inline: 'center' // Aligne le slide au centre horizontal du carousel
+    //   });
       
-      setActiveCard(cardId);
-    }
+    //   setActiveCard(cardId);
+    // }
+
+    if (!element || !container) return;
+
+    const containerWidth = container.clientWidth;
+    const slideWidth = element.offsetWidth;
+    const targetScrollLeft =
+      element.offsetLeft - (containerWidth - slideWidth) / 2;
+
+    container.scrollTo({
+      left: Math.max(0, targetScrollLeft),
+      behavior: 'smooth'
+    });
+
+    // setActiveCard(cardId);
   };
 
   const startAutoScroll = () => {
@@ -212,7 +232,7 @@ export default function Projects() {
 
   return (
     <section id="realisations" className={styles.section}>
-      <div className="container">
+      <div className={styles.containerCustom}>
         
         {/* Header */}
         <div className={styles.header}>
@@ -220,24 +240,26 @@ export default function Projects() {
         </div>
 
         {/* Navigation Cards */}
-        <div className={styles.cardsGrid}>
-          {projects.map((proj) => (
-            <div 
-              key={proj.cardId}
-              id={proj.cardId}
-              className={`${styles.card} ${activeCard === proj.cardId ? styles.active : ''}`}
-              onClick={() => scrollToSlide(proj.id, proj.cardId)}
-            >
-              <div className={styles.cardImgContainer}>
-                 <div className={styles.cardArrow}>
-                    <i className="ph ph-arrow-up-right"></i>
-                 </div>
-                 <Image src={proj.img} alt={proj.title} />
+        <div className={styles.cardsGridContainer}>
+          <div className={styles.cardsGrid}>
+            {projects.map((proj) => (
+              <div 
+                key={proj.cardId}
+                id={proj.cardId}
+                className={`${styles.card} ${activeCard === proj.cardId ? styles.active : ''}`}
+                onClick={() => scrollToSlide(proj.id, proj.cardId)}
+              >
+                <div className={styles.cardImgContainer}>
+                  <div className={styles.cardArrow}>
+                      <i className="ph ph-arrow-up-right"></i>
+                  </div>
+                  <Image src={proj.img} alt={proj.title} />
+                </div>
+                <h3>{proj.title}</h3>
+                <p>{proj.desc1}</p>
               </div>
-              <h3>{proj.title}</h3>
-              <p>{proj.desc1}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         <div className={styles.carouselWrapper}>
@@ -255,9 +277,9 @@ export default function Projects() {
             id="carousel-container" 
             ref={carouselRef} 
             className={`no-scrollbar ${styles.carousel}`}
-            onWheel={stopAutoScroll}
-            onTouchStart={stopAutoScroll}
-            onMouseDown={stopAutoScroll}
+            onWheel={() => setActiveCard("")}
+            onTouchStart={() => setActiveCard("")}
+            onMouseDown={() => setActiveCard("")}
           > 
             {projects.map((proj) => (
               <div key={proj.id} id={proj.id} className={styles.slide}>
@@ -308,6 +330,7 @@ export default function Projects() {
                         isVideoPlaying.current = false;
                         setPlayingStatus(prev => ({ ...prev, [proj.id]: false }));
                       }}
+                      poster={proj.poster}
                     >
                       <source src={proj.video} type="video/mp4" />
                     </video>
