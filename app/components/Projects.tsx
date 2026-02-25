@@ -31,7 +31,7 @@ const projects: Project[] = [
     desc1: "Vous accompagner au mieux dans votre image de marque et votre communication.", 
     desc2: "Le film institutionnel donne un visage humain à votre structure. Au-delà des chiffres et des slogans, il met en lumière vos valeurs, vos équipes et votre impact réel.", 
     img: corporate,
-    video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
+    video: "https://github.com/Achassqt/karbone/releases/download/v1.0/FILMTBM7_Master_Web.mp4",
   },
   { 
     id: 'slide-pub', 
@@ -41,7 +41,7 @@ const projects: Project[] = [
     desc1: "Quelques secondes pour capter l’attention. Des images pour rester en tête.", 
     desc2: "Concept fort, réalisation soignée, rythme précis : notre objectif est simple transformer un message en impact.", 
     img: pub,
-    video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
+    video: "https://github.com/Achassqt/karbone/releases/download/v1.0/SALOMON_PUB_V7.mov",
   },
   { 
     id: 'slide-event', 
@@ -51,7 +51,7 @@ const projects: Project[] = [
     desc1: "Un instant capturé, une mémoire partagée.", 
     desc2: "La magie de l’instant présent, immortalisée. Capturant l’énergie, les émotions et les moments forts pour offrir un souvenir inoubliable à vos participants et à votre audience.", 
     img: event,
-    video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
+    video: "https://github.com/Achassqt/karbone/releases/download/v1.0/Battle.reborn.noir.et.blanc.16-9.mov",
   },
   { 
     id: 'slide-clip', 
@@ -61,7 +61,7 @@ const projects: Project[] = [
     desc1: "Une chanson s’écoute. Un clip se ressent.", 
     desc2: "Le clip, c’est la rencontre entre le son et l’image, entre le rythme et l’émotion. Nous créons des univers visuels qui prolongent la musique, lui donnent un visage, une texture, une mémoire.", 
     img: clip,
-    video: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
+    video: "https://github.com/Achassqt/karbone/releases/download/v1.0/CLIP_4THESUN_COMPRESS.mp4",
   },
 ];
 
