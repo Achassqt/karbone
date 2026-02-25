@@ -277,9 +277,9 @@ export default function Projects() {
             id="carousel-container" 
             ref={carouselRef} 
             className={`no-scrollbar ${styles.carousel}`}
-            onWheel={() => setActiveCard("")}
-            onTouchStart={() => setActiveCard("")}
-            onMouseDown={() => setActiveCard("")}
+            // onWheel={() => setActiveCard("")}
+            // onTouchStart={() => setActiveCard("")}
+            // onMouseDown={() => setActiveCard("")}
           > 
             {projects.map((proj) => (
               <div key={proj.id} id={proj.id} className={styles.slide}>
