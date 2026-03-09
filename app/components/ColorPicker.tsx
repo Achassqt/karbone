@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 export default function ColorPicker() {
-  const [color, setColor] = useState("#d6ff3f");
+  // const [color, setColor] = useState("#d6ff3f");
+  const [color, setColor] = useState("#efcaff");
 
   useEffect(() => {
     document.documentElement.style.setProperty("--color-neon", color);
