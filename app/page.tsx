@@ -39,16 +39,16 @@ export default function Home() {
                 Suivez-nous :
               </div>
               <div style={{ display: 'flex', gap: '1rem', fontSize: '1.5rem' }}>
-                <a href=''>
+                {/* <a href=''>
                   <i className="ph-fill ph-facebook-logo"></i>
-                </a>
-                <a href=''>
+                </a> */}
+                <a href='https://www.instagram.com/karboneproductions/' target="_blank" rel="noopener noreferrer">
                   <i className="ph-fill ph-instagram-logo"></i>
                 </a>
-                <a href=''>
+                <a href='https://www.linkedin.com/company/karbone-productions' target="_blank" rel="noopener noreferrer">
                   <i className="ph-fill ph-linkedin-logo"></i>
                 </a>
-                <a href=''>
+                <a href='https://www.youtube.com/@KarboneProductions' target="_blank" rel="noopener noreferrer">
                   <i className="ph-fill ph-youtube-logo"></i>
                 </a>
               </div>
